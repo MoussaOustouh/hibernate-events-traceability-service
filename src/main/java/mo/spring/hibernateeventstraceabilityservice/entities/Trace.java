@@ -1,20 +1,17 @@
 package mo.spring.hibernateeventstraceabilityservice.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public class Trace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_trace", nullable = false)
-    private Long id;
+    private Long idTrace;
 
     @Column(name = "action", nullable = false)
     private String action;
@@ -28,12 +25,12 @@ public class Trace {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    public Long getId() {
-        return id;
+    public Long getIdTrace() {
+        return idTrace;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdTrace(Long idTrace) {
+        this.idTrace = idTrace;
     }
 
     public String getAction() {
@@ -66,5 +63,16 @@ public class Trace {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Trace{" +
+                "idTrace=" + idTrace +
+                ", action='" + action + '\'' +
+                ", subAction='" + subAction + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", userId=" + userId +
+                '}';
     }
 }

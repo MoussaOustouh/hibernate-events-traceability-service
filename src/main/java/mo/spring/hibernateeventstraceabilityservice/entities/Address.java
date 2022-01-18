@@ -1,38 +1,36 @@
 package mo.spring.hibernateeventstraceabilityservice.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import mo.spring.hibernateeventstraceabilityservice.mo_traceability.entities_listeners.implementations.AddressEntityListner;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "addresses")
-//@AttributeOverrides({
-//        @AttributeOverride(name = "ipAddress", column = @Column(name="ip_address")),
-//        @AttributeOverride(name = "subAction", column = @Column(name = "sub_action", nullable = true))
-//})
 @EntityListeners(AddressEntityListner.class)
 public class Address extends Trace implements Serializable {
 
+    @Column(name = "id_address")
     private Long id;
+
+    @Column(name = "street1", nullable = false)
     private String street1;
+
+    @Column(name = "street2", nullable = false)
     private String street2;
+
+    @Column(name = "city", nullable = false)
     private String city;
+
+    @Column(name = "state", nullable = false)
     private String state;
+
+    @Column(name = "zip", nullable = false)
     private String zip;
 
-    @JsonIgnore
-    private Member member;
-
-    @Column(name = "id_address")
     public Long getId() {
         return id;
     }
@@ -41,7 +39,6 @@ public class Address extends Trace implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "street1", nullable = false)
     public String getStreet1() {
         return street1;
     }
@@ -50,7 +47,6 @@ public class Address extends Trace implements Serializable {
         this.street1 = street1;
     }
 
-    @Column(name = "street2", nullable = false)
     public String getStreet2() {
         return street2;
     }
@@ -59,7 +55,6 @@ public class Address extends Trace implements Serializable {
         this.street2 = street2;
     }
 
-    @Column(name = "city", nullable = false)
     public String getCity() {
         return city;
     }
@@ -68,7 +63,6 @@ public class Address extends Trace implements Serializable {
         this.city = city;
     }
 
-    @Column(name = "state", nullable = false)
     public String getState() {
         return state;
     }
@@ -77,23 +71,12 @@ public class Address extends Trace implements Serializable {
         this.state = state;
     }
 
-    @Column(name = "zip", nullable = false)
     public String getZip() {
         return zip;
     }
 
     public void setZip(String zip) {
         this.zip = zip;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
     }
 
     @Override
